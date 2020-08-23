@@ -1,0 +1,40 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.example.bsscco.presentation.common.view_data.RefreshableFixSizeListViewData"
+            />
+
+        <variable
+            name="eventListener"
+            type="com.example.bsscco.presentation.common.view_events.RefreshableListEventListener"
+            />
+
+        <import type="com.example.bsscco.presentation.common.enums.LoadingStatus" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:colorSchemeColor="@{ @color/colorPrimary }"
+        app:onRefreshListener="@{ () -> eventListener.onPullToRefresh() }"
+        app:refreshing="@{ viewData.loadingStatus == LoadingStatus.LOADING }"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:descendantFocusability="blocksDescendants"
+            app:dataList="@{ viewData.dataList }"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:visibility="@{ viewData.loadingStatus != LoadingStatus.FAILED }"
+            />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

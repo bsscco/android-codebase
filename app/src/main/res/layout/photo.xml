@@ -1,0 +1,48 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="viewData"
+            type="com.example.bsscco.presentation.main.fragments.photos.view_data.photo.PhotoViewData"
+            />
+
+        <variable
+            name="eventListener"
+            type="com.example.bsscco.presentation.main.fragments.photos.view_events.PhotoEventListener"
+            />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> eventListener.onPhotoClick(viewData) }"
+            android:scaleType="centerCrop"
+            app:imageHeight="@{ viewData.imageHeight }"
+            app:imageUrl="@{ viewData.imageUrl }"
+            app:imageWidth="@{ viewData.imageWidth }"
+            tools:background="#55000000"
+            tools:ignore="ContentDescription"
+            tools:layout_height="200dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@{ viewData.title }"
+            tools:text="Title"
+            />
+    </RelativeLayout>
+
+
+</layout>
